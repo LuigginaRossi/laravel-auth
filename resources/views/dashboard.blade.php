@@ -26,3 +26,6 @@
 @endsection
 
 {{-- creo card e copio tabella categorie , stamperà ultimi 5  --}}
+{{-- "name", "description", "cover_img", "github_link" --}}
+
+

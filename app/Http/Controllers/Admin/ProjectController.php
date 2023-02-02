@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
@@ -14,7 +17,8 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //
+        $projects= Project::All();
+        return view('admin.projects.index', compact('projects'));
     }
 
     /**
@@ -24,7 +28,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.projects.create');
     }
 
     /**
@@ -35,7 +39,14 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data= $request->validate();
+
+        $project= Project::create([
+            ...$data,
+            "user_id" =>Auth::id(),
+        ]);
+
+        return redirect()->route('admin.projects.show', $project->id);
     }
 
     /**
@@ -46,7 +57,8 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        //
+        $project= Project::findOrFail($id);
+        return view('admin.projects.show', $project->id);
     }
 
     /**
@@ -57,7 +69,8 @@ class ProjectController extends Controller
      */
     public function edit($id)
     {
-        //
+        $project= Project::findOrFail($id);
+        return view('admin.projects.edit', $project->id);
     }
 
     /**
@@ -69,7 +82,11 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $project= Project::findOrFail($id);
+        $data= $request->all(); //validazione
+        $project->update($data);
+
+        return redirect()->route('admin.projects.show', $id)
     }
 
     /**
@@ -80,6 +97,9 @@ class ProjectController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $project = Project::findOrfail($id);
+        $project->delete();
+
+        return redirect()->route('admin.projects.index');
     }
 }

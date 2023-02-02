@@ -25,22 +25,9 @@ Route::middleware(['auth', 'verified'])
     ->prefix('admin') //porzione uri
     ->name('admin.')    //name rotta
     ->group(function (){
-        // READ- legge tutti gli elementi della mia tabella
-        //Route::get("/comics", [DashboardController::class, "index"])->name("comics.index");
-        //CREATE- attraverso un form chiediamo informazioni per creare una nuova istanza/elemento della mia tabella Comics
-        //Route::get("/comics/create", [DashboardController::class, "create"])->name("comics.create");
-        //SHOW- mostra una singola istanza/elemento, passo valore dinamico: id
-        //Route::get("/comics/{comic}", [DashboardController::class, "show"])->name('comics.show');
-        //STORE- salva i dati inseriti tramite comics.create nel mio db
-        //Route::post("/comics", [DashboardController::class, "store"])->name("comics.store");
-        //EDIT - Aggiorno i dati di una risorsa/istanza con un form 
-        //Route::get("/comics/{comic}/edit", [DashboardController::class, "edit"])->name("comics.edit"); 
-        //UPDATE- ricevo dati del from edit e aggiorno DB
-        //Route::put("/comics/{comic}", [DashboardController::class, "update"])->name("comics.update");
-        //DELETE- cancello dati
-        //Route::delete("/comics/{comic}",[DashboardController::class, "destroy"])->name("comics.destroy");
-    
-        Route::resource("categories", CategoryController::class);
+        
+        Route::resource('projects', ProjectController::class);
+        Route::resource('categories', CategoryController::class);
         //queste iniziano tutte con nomi :admin. rotte: admin/
         // php artisan route:list
     });

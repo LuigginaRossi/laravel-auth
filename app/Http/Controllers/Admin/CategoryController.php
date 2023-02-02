@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
@@ -26,7 +27,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.categories.crate');
+        return view('admin.categories.create');
     }
 
     /**
@@ -37,11 +38,15 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $data= $request->All() //validate
+        $data= $request->validate(); 
 
-        $categoriy = Category::created($data);
+        $category = Category::create(
+            [
+                ...$data,
+                "user_id" => Auth::id()
+            ]);
 
-        return redirect()->route('admin.category.show', $categoriy->id);
+        return redirect()->route('admin.categories.show', $category->id);
     }
 
     /**
@@ -53,7 +58,7 @@ class CategoryController extends Controller
     public function show($id)
     {
         $category= Category::findOrFail($id);
-        return view('admin.category.show', compact('category'));
+        return view('admin.categories.show', compact('category'));
     }
 
     /**
@@ -65,7 +70,7 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $category= Category::findOrFail($id);
-        return view('admin.category.edit', compact('category'));
+        return view('admin.categories.edit', compact('category'));
     }
 
     /**
@@ -79,10 +84,10 @@ class CategoryController extends Controller
     {
         $category= Category::findOrFail($id);
 
-        $data= request->All() ;//validazione
+        $data= $request->All() ;//validazione
         $category->update($data);
 
-        return redirect()->view('admin.category.show', $id);
+        return redirect()->view('admin.categories.show', $id);
     }
 
     /**
