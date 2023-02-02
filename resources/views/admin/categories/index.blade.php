@@ -18,9 +18,9 @@
                     </thead>
                     <div class="tbody">
                         <tr>
-                            <td>{{category->id}}</td>
+                            {{-- <td>{{category->id}}</td>
                             <td>{{category->name}}</td>
-                            <td>{{category->description}}</td>
+                            <td>{{category->description}}</td> --}}
 
                         </tr>
                     </div>
