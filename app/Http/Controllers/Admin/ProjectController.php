@@ -39,12 +39,15 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        $data= $request->validate();
+        // $data= $request->validated();
 
-        $project= Project::create([
-            ...$data,
-            "user_id" =>Auth::id(),
-        ]);
+        // $project= Project::create([
+        //     ...$data,
+        //     "user_id" =>Auth::id(),
+        // ]);
+
+        $data= $request->all();
+        $project= Project::create($data);
 
         return redirect()->route('admin.projects.show', $project->id);
     }
@@ -58,7 +61,8 @@ class ProjectController extends Controller
     public function show($id)
     {
         $project= Project::findOrFail($id);
-        return view('admin.projects.show', $project->id);
+        
+        return view('admin.projects.show', compact('project'));
     }
 
     /**
@@ -86,7 +90,7 @@ class ProjectController extends Controller
         $data= $request->all(); //validazione
         $project->update($data);
 
-        return redirect()->route('admin.projects.show', $id)
+        return redirect()->route('admin.projects.show', $id);
     }
 
     /**

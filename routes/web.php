@@ -26,8 +26,8 @@ Route::middleware(['auth', 'verified'])
     ->name('admin.')    //name rotta
     ->group(function (){
         
-        Route::resource('projects', ProjectController::class);
-        Route::resource('categories', CategoryController::class);
+        Route::resource('/projects', ProjectController::class);
+        Route::resource('/categories', CategoryController::class);
         //queste iniziano tutte con nomi :admin. rotte: admin/
         // php artisan route:list
     });
