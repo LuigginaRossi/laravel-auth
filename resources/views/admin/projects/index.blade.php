@@ -1,11 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    {{-- riceve categories --}}
     {{-- creo la mia tabella --}}
             {{-- aggiungo bottone aggiungo categoria --}}
             <a href="{{route('admin.projects.create')}}">Create</a>
-            {{-- <a href="{{route('admin.projects.edit')}}">Edit project</a> --}}
     <div class="container">
         
         <div class="row row-cols-1 row-cols-md-4 g-4">
@@ -38,14 +36,19 @@
                                     </button>
                                 </form>
                             </div>
-                                
-    
+                                {{-- creo un input  con type="hidden" e value="0" 
+                                sopra il checkbox che l'utente deve fleggare 
+                                cosi se non viene fleggato viene inviato il valore del mio input hidden
+
+                                se viene fleggato il secondo input allora vengono inviati due valori:
+                                il primo: public= 0
+                                il  secondo public=1
+                                quindi il secono lo sovrascrive --}}    
                         </div>
                     </div>
                 </div>
             @endforeach
         </div>
-
 
 
 

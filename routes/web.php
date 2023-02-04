@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController as PublicPostController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\ProfileController;
@@ -21,6 +22,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//per utente loggato
 Route::middleware(['auth', 'verified'])
     ->prefix('admin') //porzione uri
     ->name('admin.')    //name rotta
@@ -31,6 +33,12 @@ Route::middleware(['auth', 'verified'])
         //queste iniziano tutte con nomi :admin. rotte: admin/
         // php artisan route:list
     });
+
+//Utente non loggato:
+// Route::get('/post', [PublicPostController::class, 'index'])->name('post.index');
+// Route::get('/about', [PublicController::class, 'about'])->name('about.index');
+// Route::get('/contact', [PublicController::class, 'contacts'])->name('contact.index');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');

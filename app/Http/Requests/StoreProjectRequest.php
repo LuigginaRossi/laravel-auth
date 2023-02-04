@@ -30,9 +30,14 @@ class StoreProjectRequest extends FormRequest
         return [
             "title"=> "required|string|unique|min:5",
             "description"=>"required|string",
-            "cover_img"=>"required|string",
-            "github_link"=>"required|string",
+            "cover_img"=>"required|image",
+            "github_link"=>"required|string|url",
             "completed"=> "nullable|boolean",
         ];
     }
 }
+//  validazione nelle checkbox => accepted il campo puo esssere on 1, 0 , true 
+
+//request->has() ci è stato inviato?
+
+

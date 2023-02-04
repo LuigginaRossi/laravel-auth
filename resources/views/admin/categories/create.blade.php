@@ -2,13 +2,13 @@
 
 @section('content')
 
-    <form action="{{route('admin.categories.store')}}" method="POST">
-    @csrf
+    {{-- <form action="{{route('admin.categories.store')}}" method="POST">
+    @csrf --}}
         {{-- vari input per la creazione categoria --}}
 
-    <a href="{{route('admin.categories.index')}}"></a>
-    <button>CREA CATEGORIA</button>
+    {{-- <a href="{{route('admin.categories.index')}}"></a> --}}
+    {{-- <button>CREA CATEGORIA</button>
 
-    </form>
+    </form> --}}
 
 @endsection

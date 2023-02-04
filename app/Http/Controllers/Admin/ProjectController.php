@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreProjectRequest;
 use App\Models\Category;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -37,16 +39,22 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProjectRequest $request)
     {
-        // $data= $request->validated();
+         $data= $request->validated();
 
-        // $project= Project::create([
-        //     ...$data,
-        //     "user_id" =>Auth::id(),
-        // ]);
+         if(key_exists('cover_img', $data)){
+            $path= Storage::put('projects', $data['cover_img']);
 
-        $data= $request->all();
+         }
+
+         $project= Project::create([
+             ...$data,
+             "user_id" =>Auth::id(),
+             "cover_img"=>$path ?? "Imagine defautl",
+         ]);
+
+        // $data= $request->all();
         $project= Project::create($data);
 
         return redirect()->route('admin.projects.show', $project->id);
