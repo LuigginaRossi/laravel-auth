@@ -9,18 +9,19 @@
         <form action="{{ route('admin.projects.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
-        {{-- title-input --}}
+        {{-- name-input --}}
         <div class="mb-3">
-            <label class="form-label">Title Project</label>
+            <label class="form-label">Name Project</label>
             <input type="text" 
-            class="form-control @error('title') is-invalid @elseif(old('title')) is-valid  @enderror"
-            name="{{ $errors->has('title') ? '' : old('title') }}">
+            class="form-control @error('name') is-invalid @elseif(old('name')) is-valid  @enderror"
+            value="{{ $errors->has('name') ? '' : old('name') }}"
+            name="name">
             
-            @error('title')
+            @error('name')
                 <div class="invalid-feedback">
                 {{ $message }}
                 </div>
-            {{-- @elseif(old('title'))
+            {{-- @elseif(old('name'))
                 valid-feedback
                 <div class="valid-feedback">
                 Ottimo lavoro!
@@ -33,9 +34,7 @@
             <label class="form-label">Description</label>
             <textarea cols="30" rows="5" 
              name="description"
-             class="form-control @error('description') is-invalid @enderror">
-                {{old('description')}}
-            </textarea>
+             class="form-control @error('description') is-invalid @enderror">{{old('description')}}</textarea>
         </div>
 
         {{-- cover_img input --}}

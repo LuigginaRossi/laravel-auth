@@ -14,9 +14,9 @@ class StoreProjectRequest extends FormRequest
      */
     public function authorize()
     {
-        if(Auth::user()->role!== "admin"){
-            return false;
-        }
+         if(! Auth::id()){
+             return false;
+         }
         return true;
     }
 
@@ -28,11 +28,11 @@ class StoreProjectRequest extends FormRequest
     public function rules()
     {
         return [
-            "title"=> "required|string|unique|min:5",
+            "name"=> "required|string|min:5",
             "description"=>"required|string",
             "cover_img"=>"required|image",
-            "github_link"=>"required|string|url",
-            "completed"=> "nullable|boolean",
+            "github_link"=>"nullable|string|url",
+            "completed"=> "boolean",
         ];
     }
 }
