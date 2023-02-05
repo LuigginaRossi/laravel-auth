@@ -50,7 +50,7 @@ class ProjectController extends Controller
          $project= Project::create([
              ...$data,
              "user_id" =>Auth::id(),
-             "cover_img"=>$path ?? "Image",
+             "cover_img"=>$path ?? "DefaultImage",
          ]);
 
         // $data= $request->all();
@@ -69,6 +69,10 @@ class ProjectController extends Controller
     {
         $project= Project::findOrFail($id);
         
+        if (!$project) {
+            abort(404, "Not found the project!");
+        }
+
         return view('admin.projects.show', compact('project'));
     }
 
@@ -81,7 +85,10 @@ class ProjectController extends Controller
     public function edit($id)
     {
         $project= Project::findOrFail($id);
-        return view('admin.projects.edit', $project->id);
+        if (!$project) {
+            abort(404, "Not found the project!");
+        }
+        return view('admin.projects.edit', compact('project'));
     }
 
     /**
@@ -95,6 +102,13 @@ class ProjectController extends Controller
     {
         $project= Project::findOrFail($id);
         $data= $request->all(); //validazione
+
+        if(key_exists('cover_img', $data)){
+            $path= Storage::put('projects', $data['cover_img']);
+
+            Storage::delete($project->cover_img);
+        }
+
         $project->update($data);
 
         return redirect()->route('admin.projects.show', $id);

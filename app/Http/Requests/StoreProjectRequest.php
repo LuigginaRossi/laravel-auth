@@ -28,10 +28,10 @@ class StoreProjectRequest extends FormRequest
     public function rules()
     {
         return [
-            "title"=> "string",
+            "name"=> "required|string|min:5",
             "description"=>"required|string",
             "cover_img"=>"required|image",
-            "github_link"=>"string|url",
+            "github_link"=>"nullable|string|url",
             "completed"=> "boolean",
         ];
     }
