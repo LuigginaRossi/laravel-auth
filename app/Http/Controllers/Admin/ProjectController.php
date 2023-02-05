@@ -45,17 +45,16 @@ class ProjectController extends Controller
 
          if(key_exists('cover_img', $data)){
             $path= Storage::put('projects', $data['cover_img']);
-
          }
 
          $project= Project::create([
              ...$data,
              "user_id" =>Auth::id(),
-             "cover_img"=>$path ?? "Imagine defautl",
+             "cover_img"=>$path ?? "Image",
          ]);
 
         // $data= $request->all();
-        $project= Project::create($data);
+        // $project= Project::create($data);
 
         return redirect()->route('admin.projects.show', $project->id);
     }
