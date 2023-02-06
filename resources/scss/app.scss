@@ -2,6 +2,23 @@
 
 @import '~bootstrap/scss/bootstrap';
 
+
+// :::::::GENERAL::::::::::::
+:root{
+    --my-primary: #eb1335;
+}
+
+nav{
+    font-weight: 700;
+}
+
+
+
+//:::::::UTILITIES::::::
+li .nav-link{
+    color: red;
+}
+
 .card{
     height: 100%;
     img{
@@ -9,4 +26,8 @@
         object-fit: cover;
 
     }
+}
+
+.logo_welcome{
+    width: 60vw;
 }
